@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Commands:"
+echo "  create REPONAME    Create a bare repository"
+echo "  delete REPONAME    Delete a repository"
+echo "  list               List repositories"
+echo "  help               Display this help"
+echo "  exit               Disconnect from git-shell"

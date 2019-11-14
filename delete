@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ -z "$1" ] ; then
+  echo "Repository name is required."
+  exit 1
+fi
+
+if (echo $1 | egrep -q '\.git$') ; then
+  NAME=$1
+else
+  NAME=$1.git
+fi
+
+if [ ! -e "$NAME" ] ; then
+  echo "There is no repository named '$NAME'."
+  exit 1
+fi
+
+echo "Are you absolutely sure you want to delete '$NAME' forever?"
+echo -n "Type the full repository name ($NAME) to confirm: "
+read CONFIRM
+
+if [ "$CONFIRM" = "$NAME" ] ; then
+  rm -rf $NAME
+else
+  echo "Repository name does not match, cancelling."
+fi

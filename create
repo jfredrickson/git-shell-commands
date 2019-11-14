@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ -z "$1" ] ; then
+  echo "Repository name is required."
+  exit 1
+fi
+
+if (echo $1 | egrep -q '\.git$') ; then
+  NAME=$1
+else
+  NAME=$1.git
+fi
+
+if [ -e "$NAME" ] ; then
+  echo "A repository named '$NAME' already exists."
+  exit 1
+fi
+
+mkdir $NAME
+git init --bare $NAME
+echo "Repository URL: git@$(hostname):$NAME"
